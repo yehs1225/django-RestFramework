@@ -1,36 +1,15 @@
-from xml.etree.ElementTree import Comment
-from django.contrib.auth import get_user_model
-from dataclasses import fields
+from pyexpat import model
 from rest_framework import serializers
-from .models import Post,Comment
-
-User = get_user_model()
-
-class OwnerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=User
-        fields=(
-            'id','username'
-        )
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Comment
-        fields=(
-            'id','title',
-        )
+from .models import Post
 
 class PostSerializer(serializers.ModelSerializer):
-    owner = serializers.HyperlinkedIdentityField(many=False,view_name='owner-detail')
-    comments = serializers.HyperlinkedRelatedField(queryset=Comment.objects.all(),many=True,view_name='comment-detail')
-    #Meta class is a class of a class that defines how a class behaves
     class Meta:
-        model = Post
-        fields = (
+        model=Post
+        fields=(
+            'id',
             'title',
-            'owner',
-            'custom_id',
-            'category',
-            'publish_day',
-            'last_update',
-            'comments')
+            'content',
+            'publish_date',
+            'updated',
+            'author'
+        )
