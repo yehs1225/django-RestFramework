@@ -12,11 +12,9 @@
 
 #root{
     padding: 2px 16px;
-    background-color: red;
 }
 .post-delete-btn{
     position: absolute;
     top: 0;
     right: 0;
-    background-color: red;
 }
